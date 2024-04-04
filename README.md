@@ -180,11 +180,13 @@ Sure, here's the updated README with instructions for users to access the deploy
 
 The Event Management System has been deployed and is accessible on Render. You can access the application using the following URL:
 
-[Event Management System on Render]([https://your-app-name.onrender.com](https://gyangrove-backend-assignment.onrender.com/))
-
-Please note that the deployed application may have a different URL based on your Render project name. Replace `your-app-name` in the URL above with your actual Render application name.
+[https://gyangrove-backend-assignment.onrender.com/](https://gyangrove-backend-assignment.onrender.com/)
 
 ## Usage
+
+### Note:
+
+- **Data Ingestion:** Please note that the `/ingest` endpoint (`https://gyangrove-backend-assignment.onrender.com/ingest`) is provided for ingesting event data from a CSV file into the database. However, it is recommended not to run this endpoint again as data has already been inserted into the database, as running it multiple times may result in duplicate data. The system has already been pre-populated with data, so you may proceed directly to querying events using the other available endpoints.
 
 To use the Event Management System, follow these steps:
 
@@ -192,19 +194,46 @@ To use the Event Management System, follow these steps:
 2. Use the provided API endpoints to manage and query event data based on geographical location and date.
 3. Refer to the API documentation in this README for details on available endpoints and request/response formats.
 
+
+
+
+
 If you encounter any issues or have questions, please feel free to contact the contributors listed below.
 
 ---
+Here's the formatted section for the test case execution:
 
-This addition informs users that the application is deployed on Render and provides instructions for accessing and using it. Replace `your-app-name` with the actual name of your Render application.
+---
 
 ## Test Case Execution
 
-- Please refer to the attached screen recording or screenshots for the execution of the provided test case through the API.
+Please refer to the attached screen recording or screenshots for the execution of the provided test case through the API.
+
+### From Terminal
+
+#### Inserting Data
+![Insert Data](https://github.com/tanmay910/GyanGrove-Backend-Assignment/assets/105966781/9c964540-58e0-40c2-a98d-ba801892ef50)
+
+#### Finding Events
+![Find Events](https://github.com/tanmay910/GyanGrove-Backend-Assignment/assets/105966781/5b68dc2d-9c44-4c46-9e91-8d870237f2cb)
+
+
+### From deloplyed url 
+The screenshots are displayed using a JSON viewer extension for better readability.
+
+<img width="1408" alt="main page" src="https://github.com/tanmay910/GyanGrove-Backend-Assignment/assets/105966781/986d8d03-e314-4db0-817d-ff454ea4c323">
+<img width="1362" alt="respone 1" src="https://github.com/tanmay910/GyanGrove-Backend-Assignment/assets/105966781/4b95d9d2-3b17-4e6c-9645-e44758093d0b">
+<img width="1122" alt="response 2" src="https://github.com/tanmay910/GyanGrove-Backend-Assignment/assets/105966781/f87884f0-834d-461c-b2e2-18cf7835ff10">
+
+#### whithout using json viewer
+
+<img width="1678" alt="Screenshot 2024-04-04 at 8 24 05 PM" src="https://github.com/tanmay910/GyanGrove-Backend-Assignment/assets/105966781/c64715f4-a63b-47ac-b40b-6cd00a9d247b">
+
+
 
 ## Contributors
 
-- [Your Name](https://github.com/your_username)
+- [Tanmay Mahajan](https://github.com/tanmay910)
 
 If you encounter any issues or have questions, please feel free to contact the contributors listed above.
 
