@@ -32,7 +32,7 @@ MongoDB was selected as the database for the following reasons:
 ### Steps to Set Up and Run the Project:
 1. Clone the repository to your local machine:
    ```
-   git clone <repository_url>
+   git clone https://github.com/tanmay910/GyanGrove-Backend-Assignment.git
    ```
 2. Install dependencies:
    ```
