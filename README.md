@@ -172,6 +172,31 @@ Below is the updated API documentation with response format included:
 ---
 
 Please note that the example URLs provided assume that the server is running locally on port 3000. Adjust the base URL accordingly if the server is hosted on a different port or domain.
+Sure, here's the updated README with instructions for users to access the deployed application on Render:
+
+---
+
+## Project Deployment
+
+The Event Management System has been deployed and is accessible on Render. You can access the application using the following URL:
+
+[Event Management System on Render]([https://your-app-name.onrender.com](https://gyangrove-backend-assignment.onrender.com/))
+
+Please note that the deployed application may have a different URL based on your Render project name. Replace `your-app-name` in the URL above with your actual Render application name.
+
+## Usage
+
+To use the Event Management System, follow these steps:
+
+1. Visit the provided URL for the deployed application.
+2. Use the provided API endpoints to manage and query event data based on geographical location and date.
+3. Refer to the API documentation in this README for details on available endpoints and request/response formats.
+
+If you encounter any issues or have questions, please feel free to contact the contributors listed below.
+
+---
+
+This addition informs users that the application is deployed on Render and provides instructions for accessing and using it. Replace `your-app-name` with the actual name of your Render application.
 
 ## Test Case Execution
 
