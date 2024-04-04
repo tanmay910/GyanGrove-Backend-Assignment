@@ -13,7 +13,9 @@ dotenv.config();
 const { getWeather, getDistance } = require('../helper/externalApis');
 
 
-
+exports.main = async (req, res) => {
+  res.json({ message: 'Welcome to the event finder API' });
+};
  
 
 exports.ingestData = async (req, res) => {
@@ -48,7 +50,7 @@ exports.ingestData = async (req, res) => {
 // Define route to find events based on user's location and date
 exports.findEvents = async (req, res) => {
   try {
-    const { latitude, longitude, date, page, pageSize  } = req.query;
+    const { latitude, longitude, date, page, pageSize } = req.query;
 
     const currentDate = new Date(date);
     const nextTwoWeeks = new Date(currentDate);
@@ -63,30 +65,22 @@ exports.findEvents = async (req, res) => {
     const events = await Event.find({
       date: { $gte: currentDate, $lte: nextTwoWeeks }
     })
-    .sort({ date: 1 })
-    .skip((page - 1) * pageSize)
-    .limit(pageSize);
+      .sort({ date: 1 })
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
 
     const eventDetails = await Promise.all(events.map(async event => {
       const weather = await getWeather(event.cityName, event.date);
       const distance = await getDistance(latitude, longitude, event.latitude, event.longitude);
-      
+
       return {
         event_name: event.eventName,
         city_name: event.cityName,
         date: event.date.toISOString().split('T')[0],
         weather: weather,
-        distance_km: parseFloat(distance) 
+        distance_km: parseFloat(distance)
       };
     }));
-
-    res.json({
-      events: eventDetails,
-      page: parseInt(page),
-      pageSize: parseInt(pageSize),
-      totalEvents:totalEvents,
-      totalPages:totalPages
-    });
 
     const response = {
       events: eventDetails,
@@ -96,12 +90,11 @@ exports.findEvents = async (req, res) => {
       totalPages: totalPages
     };
 
-    // Sending the response with pretty formatting
-    res.header("Content-Type", "application/json");
-    res.send(JSON.stringify(response, null, 2));
-    
+    // Sending the response once
+    res.json(response);
   } catch (err) {
     console.error('Error finding events:', err);
+    // Sending an error response if an error occurs
     res.status(500).json({ error: 'Failed to find events' });
   }
 };
