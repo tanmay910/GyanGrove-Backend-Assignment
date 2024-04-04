@@ -52,70 +52,126 @@ MongoDB was selected as the database for the following reasons:
    npm start
    ```
 
-## API Documentation
+Below is the updated API documentation with response format included:
 
-### Event Creation Endpoint:
-- **POST /events**
-  - Request Body:
+---
+
+## Event Finder API
+
+### Welcome Message
+
+- **URL:** `/`
+
+- **Method:** `GET`
+
+- **Description:** Returns a welcome message for the event finder API.
+
+- **Example:**
+  ```bash
+  curl "http://localhost:3000/"
+  ```
+
+- **Response:**
+  - Status Code: `200 OK`
+  - Body:
     ```json
     {
-      "eventName": "Event Name",
-      "cityName": "City Name",
-      "date": "YYYY-MM-DD",
-      "time": "HH:MM",
-      "latitude": 12.345,
-      "longitude": 67.890
+      "message": "Welcome to the event finder API"
     }
     ```
-  - Response:
-    - Status: 201 Created
-    - Body:
-      ```json
-      {
-        "message": "Event created successfully",
-        "event": {
-          "_id": "event_id",
-          "eventName": "Event Name",
-          "cityName": "City Name",
+
+---
+
+### Ingest Data
+
+- **URL:** `/ingest`
+
+- **Method:** `POST`
+
+- **Description:** Ingests event data from a CSV file into the database.
+
+- **Example:**
+  ```bash
+  curl -X POST "http://localhost:3000/ingest"
+  ```
+
+- **Response:**
+  - Status Code: `200 OK`
+  - Body:
+    ```json
+    {
+      "message": "CSV data imported successfully"
+    }
+    ```
+
+- **Error Response:**
+  - Status Code: `500 Internal Server Error`
+  - Body:
+    ```json
+    {
+      "error": "Internal server error"
+    }
+    ```
+
+---
+
+### Find Events
+
+- **URL:** `/events/find`
+
+- **Method:** `GET`
+
+- **Query Parameters:**
+  - `latitude`: User's latitude
+  - `longitude`: User's longitude
+  - `date`: Date in `YYYY-MM-DD` format
+  - `page`: Page number
+  - `pageSize`: Number of events per page
+
+- **Description:** Retrieves events occurring within the next 14 days from the specified date, sorted by date. Also provide pagination parameters (`page` and `pageSize`).
+
+- **Example:**
+  ```bash
+  curl "http://localhost:3000/events/find?latitude=40.7128&longitude=-74.0060&date=2024-03-15&page=1&pageSize=10"
+  ```
+
+- **Response:**
+  - Status Code: `200 OK`
+  - Body:
+    ```json
+    {
+      "events": [
+        {
+          "event_name": "Event Name",
+          "city_name": "City Name",
           "date": "YYYY-MM-DD",
-          "time": "HH:MM",
-          "latitude": 12.345,
-          "longitude": 67.890
-        }
-      }
-      ```
-
-### Event Query Endpoint:
-- **GET /events/find?latitude={latitude}&longitude={longitude}&date={date}**
-  - Parameters:
-    - `latitude`: User's latitude.
-    - `longitude`: User's longitude.
-    - `date`: Date in YYYY-MM-DD format.
-  - Response:
-    - Status: 200 OK
-    - Body:
-      ```json
-      {
-        "events": [
-          {
-            "eventName": "Event Name",
-            "cityName": "City Name",
-            "date": "YYYY-MM-DD",
-            "weather": {
-              "condition": "Weather Condition",
-              "temperature": "Temperature in Celsius"
-            },
-            "distance": "Distance from User's Location in Kilometers"
+          "weather": {
+            "condition": "Weather Condition",
+            "temperature": "Temperature in Celsius"
           },
-          ...
-        ]
-      }
-      ```
+          "distance_km": "Distance from User's Location in Kilometers"
+        },
+        ...
+      ],
+      "page": 1,
+      "pageSize": 10,
+      "totalEvents": 100,
+      "totalPages": 10
+    }
+    ```
 
-### Error Codes:
-- 400 Bad Request: Invalid request parameters or missing required fields.
-- 404 Not Found: Resource not found.
-- 500 Internal Server Error: Server encountered an unexpected error.
+- **Error Response:**
+  - Status Code: `500 Internal Server Error`
+  - Body:
+    ```json
+    {
+      "error": "Failed to find events"
+    }
+    ```
+
+---
+
+Please note that the example URLs provided assume that the server is running locally on port 3000. Adjust the base URL accordingly if the server is hosted on a different port or domain.
 
 ## Test Case Execution
 
