@@ -87,6 +87,19 @@ exports.findEvents = async (req, res) => {
       totalEvents:totalEvents,
       totalPages:totalPages
     });
+
+    const response = {
+      events: eventDetails,
+      page: parseInt(page),
+      pageSize: parseInt(pageSize),
+      totalEvents: totalEvents,
+      totalPages: totalPages
+    };
+
+    // Sending the response with pretty formatting
+    res.header("Content-Type", "application/json");
+    res.send(JSON.stringify(response, null, 2));
+    
   } catch (err) {
     console.error('Error finding events:', err);
     res.status(500).json({ error: 'Failed to find events' });
